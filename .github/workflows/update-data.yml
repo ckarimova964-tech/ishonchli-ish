@@ -1,0 +1,36 @@
+name: Vakansiyalarni yangilash
+
+# Har kuni ertalab 06:00 (Toshkent vaqti = UTC+5, ya'ni 01:00 UTC) ishga tushadi.
+# Qo'lda ham ishga tushirish mumkin: Actions → Run workflow.
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Rasmiy bazalardan ma'lumot yig'ish
+        run: |
+          node scripts/harvest-uz.mjs data/uz-raw.json
+          node scripts/harvest-local.mjs data/local-raw.json
+          node scripts/harvest-ru.mjs data/ru-raw.json
+          node scripts/prepare.mjs . src/vacancies.json
+
+      - name: O'zgarish bo'lsa commit qilish
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data src/vacancies.json
+          git diff --staged --quiet && echo "o'zgarish yo'q" && exit 0
+          git commit -m "ma'lumot yangilandi: $(date -u +%Y-%m-%d)"
+          git push
