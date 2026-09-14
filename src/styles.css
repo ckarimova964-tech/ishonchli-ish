@@ -487,6 +487,16 @@ body { top: 0 !important; }
 .langs li span { font-size: 13px; color: var(--ink-2); }
 .route-links a { font-size: 14px; font-weight: 500; }
 
+/* ---------- Ariza berish yo'riqnomasi ---------- */
+.apply-how-btn { color: var(--stamp); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.apply-how {
+  margin-top: 12px; padding: 14px 16px; border-radius: 10px;
+  background: var(--stamp-soft); border: 1px solid #c7dcfa; font-size: 14px; color: var(--ink-2);
+}
+.apply-how > b { color: var(--ink); }
+.apply-how ol { margin: 10px 0; padding-left: 20px; display: grid; gap: 6px; }
+.apply-how p { font-size: 13px; color: var(--ink-3); }
+
 /* ---------- Vizani olish tartibi ---------- */
 .visa {
   display: grid; grid-template-columns: 1.5fr 1fr; gap: 22px;

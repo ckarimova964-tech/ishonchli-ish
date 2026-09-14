@@ -13,6 +13,7 @@ function Field({ label, value }) {
 
 function UzCard({ v }) {
   const [open, setOpen] = useState(false)
+  const [how, setHow] = useState(false)
   const left = daysLeft(v.deadline)
   const closed = v.deadline && left !== null && left < 0
 
@@ -110,8 +111,34 @@ function UzCard({ v }) {
           {open ? 'Yopish' : 'Batafsil'}
         </button>
         <span className="spacer" />
-        <span className="link-mini">Ariza davlat tizimida bepul qabul qilinadi</span>
+        <button className="link-mini apply-how-btn" onClick={() => setHow(h => !h)}>
+          {how ? 'Yo‘riqnomani yopish' : 'Qanday ariza beriladi?'}
+        </button>
       </div>
+
+      {how && (
+        <div className="apply-how">
+          <b>Ariza bepul. Buning uchun shaxsingizni tasdiqlashingiz kerak:</b>
+          <ol>
+            <li>«Ariza berish» tugmasini bosing — vakansiyaning rasmiy sahifasi ochiladi.</li>
+            <li>U yerda «Anketa to‘ldirish» tugmasini bosing.</li>
+            <li>
+              Tizimga <b>Face-ID</b>, <b>OneID</b> yoki <b>MyID</b> orqali kiring. OneID hisobingiz
+              bo‘lmasa —{' '}
+              <a href="https://id.egov.uz/uz" target="_blank" rel="noopener noreferrer">
+                id.egov.uz
+              </a>{' '}
+              da bepul ro‘yxatdan o‘ting (pasport va telefon raqami kerak).
+            </li>
+            <li>Anketani to‘ldirib yuboring. Natija haqida tizim o‘zi xabar beradi.</li>
+          </ol>
+          <p>
+            Kirishsiz anketa ochilmaydi — bu davlat tizimining talabi, arizani haqiqiy odam
+            berayotganini tekshirish uchun. Sizdan pul yoki parol so‘ragan boshqa sayt va odamlarga
+            ishonmang.
+          </p>
+        </div>
+      )}
     </article>
   )
 }
