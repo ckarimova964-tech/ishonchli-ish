@@ -336,6 +336,15 @@ footer.site h4 { font-size: 15px; color: var(--ink); margin-bottom: 8px; }
 }
 .sos-btn:hover { filter: brightness(1.06); }
 @media (max-width: 900px) { .topbar-actions { margin-left: auto; } }
+.hero-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.hero-links button {
+  border: 1px solid #c7dcfa; background: var(--card); color: var(--stamp); cursor: pointer;
+  padding: 11px 16px; border-radius: 12px; font: 600 14px/1.3 var(--sans); text-align: left;
+  box-shadow: 0 6px 18px -14px rgba(26, 111, 224, .6);
+}
+.hero-links button:hover { border-color: var(--stamp); }
+.hero-links button.danger { border-color: #f5c2bd; color: var(--danger); box-shadow: 0 6px 18px -14px rgba(217, 58, 43, .6); }
+.hero-links button.danger:hover { border-color: var(--danger); }
 .show-sm { display: none; }
 .hero-search .btn { justify-content: center; }
 @media (max-width: 520px) {

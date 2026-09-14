@@ -54,6 +54,15 @@ export default function Hero({ onGo, stats, liveState, setQuery }) {
           ))}
         </div>
 
+        <div className="hero-links">
+          <button onClick={() => onGo('yol')}>
+            ✈️ Chet elga qanday borish mumkin va qaysi til kerak?
+          </button>
+          <button className="danger" onClick={() => onGo('yordam')}>
+            🆘 Xorijda qiyin vaziyatga tushdingizmi?
+          </button>
+        </div>
+
         <div className="ribbon">
           <div>
             <b>{nat ? nat.toLocaleString('en-US').replace(/,/g, ' ') : stats.localCount}</b>

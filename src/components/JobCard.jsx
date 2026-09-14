@@ -104,15 +104,13 @@ function UzCard({ v }) {
 
       <div className="actions">
         <a className="btn sm" href={v.url} target="_blank" rel="noopener noreferrer">
-          Ariza berish → xorijdaish.uz
+          Ariza berish
         </a>
         <button className="btn sm ghost" onClick={() => setOpen(o => !o)}>
           {open ? 'Yopish' : 'Batafsil'}
         </button>
         <span className="spacer" />
-        <a className="link-mini" href={v.url} target="_blank" rel="noopener noreferrer">
-          Manba: Migratsiya agentligi
-        </a>
+        <span className="link-mini">Ariza davlat tizimida bepul qabul qilinadi</span>
       </div>
     </article>
   )
@@ -204,7 +202,7 @@ function RuCard({ v }) {
         </button>
         <span className="spacer" />
         <a className="link-mini" href={v.url} target="_blank" rel="noopener noreferrer">
-          E’lon sahifasi: trudvsem.ru
+          Asl e’lonni ko‘rish
         </a>
       </div>
     </article>
@@ -287,7 +285,7 @@ function LocalCard({ v }) {
         </button>
         <span className="spacer" />
         <a className="link-mini" href={v.url} target="_blank" rel="noopener noreferrer">
-          Manba: ish.mehnat.uz
+          Asl e’lonni ko‘rish
         </a>
       </div>
     </article>
