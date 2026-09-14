@@ -62,5 +62,11 @@ for (const [q, uz] of QUERIES) {
     console.error(`${q}: ERROR ${e.message}`)
   }
 }
+// Himoya: manba bo'sh javob qaytarsa (masalan, chet el serveridan kirish cheklangan bo'lsa),
+// mavjud faylni ustidan yozmaymiz — eski ma'lumot saqlanib qoladi.
+if (out.length === 0) {
+  console.error('DIQQAT: manbadan 0 ta yozuv keldi — eski fayl saqlab qolindi')
+  process.exit(0)
+}
 fs.writeFileSync(process.argv[2], JSON.stringify(out, null, 1))
 console.error('TOTAL', out.length)

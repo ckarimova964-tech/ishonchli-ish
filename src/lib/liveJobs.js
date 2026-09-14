@@ -13,7 +13,10 @@ export const PER_PAGE = 50
 
 /** Kasb bo'limlari — har biriga bir nechta so'rov so'zi (lotin, kirill, rus). */
 export const CATEGORIES = [
-  { id: 'oshxona', label: 'Oshxona · restoran', uz: ['oshpaz', 'ofitsiant', 'restoran', 'qandolatchi'], ru: ['повар', 'официант'] },
+  { id: 'ofitsiant', label: 'Ofitsiant', uz: ['ofitsiant', 'barmen', 'idish yuvuvchi'], ru: ['официант', 'бармен'] },
+  // To'yxonalar bazada «to'yxona» emas, «...bazmgohi», «...tantanalar saroyi» nomi bilan ro'yxatda
+  { id: 'toyxona', label: 'To‘yxona · bazmgoh', uz: ['bazm', 'tantana', "to'y saroyi", 'restorani', 'kafesi'], ru: ['банкетный', 'официант банкет'] },
+  { id: 'oshxona', label: 'Oshxona · restoran', uz: ['oshpaz', 'restoran', 'oshxona', 'qandolatchi'], ru: ['повар', 'кондитер'] },
   { id: 'qurilish', label: 'Qurilish', uz: ['qurilish', 'quruvchi', 'suvoqchi', 'gisht teruvchi', 'beton'], ru: ['строительн', 'каменщик', 'бетонщик'] },
   { id: 'it', label: 'IT · dasturchi', uz: ['dasturchi', 'programmist', 'kompyuter', 'axborot texnologiya'], ru: ['программист', 'системный администратор'] },
   { id: 'talim', label: "Ta'lim · o'qituvchi", uz: ['oqituvchi', 'muallim', 'tarbiyachi', 'trener'], ru: ['учитель', 'преподаватель', 'воспитатель'] },

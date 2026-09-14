@@ -8,6 +8,14 @@ const API = 'https://ishapi.mehnat.uz/api/v1/vacancies'
 const QUERIES = [
   ['oshpaz', 'Oshpaz'],
   ['ofitsiant', 'Ofitsiant'],
+  ['barmen', 'Ofitsiant'],
+  ['idish yuvuvchi', 'Ofitsiant'],
+  // to'yxonalar bazada «bazmgohi» / «tantanalar saroyi» nomi bilan turadi
+  ['bazm', "To'yxona"],
+  ['tantana', "To'yxona"],
+  ["to'y saroyi", "To'yxona"],
+  ['restorani', "To'yxona"],
+  ['kafesi', "To'yxona"],
   ['qandolatchi', 'Qandolatchi'],
   ['sotuvchi', 'Sotuvchi'],
   ['kassir', 'Kassir'],
@@ -80,5 +88,11 @@ for (const code of codes) {
 }
 console.error('viloyatlar aniqlandi:', Object.keys(regionByCode).length, '/', codes.length)
 
+// Himoya: manba bo'sh javob qaytarsa (masalan, chet el serveridan kirish cheklangan bo'lsa),
+// mavjud faylni ustidan yozmaymiz — eski ma'lumot saqlanib qoladi.
+if (rows.length === 0) {
+  console.error('DIQQAT: manbadan 0 ta yozuv keldi — eski fayl saqlab qolindi')
+  process.exit(0)
+}
 fs.writeFileSync(process.argv[2], JSON.stringify({ rows, regionByCode }, null, 1))
 console.error('saqlandi:', rows.length, 'ta yozuv')

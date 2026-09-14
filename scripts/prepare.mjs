@@ -158,6 +158,23 @@ try {
   console.error('local-raw.json topilmadi — Ozbekiston ishlarisiz davom etamiz')
 }
 
+// Ikkinchi himoya: biror bo'lim bo'sh chiqsa, oldingi nusxadagi ma'lumot saqlanadi
+let prev = null
+try {
+  prev = JSON.parse(fs.readFileSync(OUT, 'utf8'))
+} catch {
+  /* birinchi marta — oldingi nusxa yo'q */
+}
+if (prev) {
+  if (!localOut.length && prev.local?.length) {
+    console.error('local bo‘sh — oldingi', prev.local.length, 'ta e’lon saqlab qolindi')
+    localOut = prev.local
+    regionsMap = prev.regions || regionsMap
+  }
+  if (!uzOut.length && prev.uz?.length) uzOut.push(...prev.uz)
+  if (!ruOut.length && prev.ru?.length) ruOut.push(...prev.ru)
+}
+
 const payload = {
   fetched: new Date().toISOString().slice(0, 10),
   regions: regionsMap,
