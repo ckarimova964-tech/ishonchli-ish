@@ -62,3 +62,69 @@ create view public.public_reports as
   order by published_at desc;
 
 grant select on public.public_reports to anon;
+
+
+-- =====================================================================
+-- MUHOKAMA: foydalanuvchilar sayt haqida fikr, savol va taklif yozadi
+-- =====================================================================
+-- Xavfsizlik mantiqi:
+--   * xabar darhol chiqadi (kutish yo'q), lekin baza o'zi firibgarlik belgilarini rad etadi:
+--     havola, telefon raqami va @telegram_nomi yozib bo'lmaydi — «vizaga yordam beraman,
+--     yozing» degan vositachilar muhokamani reklama joyiga aylantira olmasin;
+--   * javoblar faqat bir daraja (xabar → javob);
+--   * sayt egasi xabarni Supabase panelida `hidden = true` qilib yashiradi;
+--   * mehmon faqat qo'sha oladi; o'qish faqat `public_discussion` ko'rinishi orqali.
+
+create table if not exists public.discussion (
+  id         bigint generated always as identity primary key,
+  parent_id  bigint references public.discussion (id) on delete cascade,
+  topic      text not null default 'fikr' check (topic in ('fikr', 'savol', 'taklif', 'tajriba')),
+  author     text not null default 'Mehmon' check (char_length(author) between 1 and 60),
+  message    text not null check (char_length(message) between 3 and 1500),
+  hidden     boolean not null default false,
+  created_at timestamptz not null default now(),
+  -- firibgarlikka qarshi: havola, telefon raqami (9+ raqam), @nom.
+  -- Maosh kabi sonlar («15 000 000 so'm» — 8 raqam) o'tadi. \y — PostgreSQL'da so'z chegarasi.
+  constraint discussion_no_contacts check (
+    message !~* '(https?://|www\.|t\.me/|[a-z0-9-]+\.(uz|ru|com|net|org|me)\y|@[a-z0-9_]{4,}|([0-9][ ()-]*){9,})'
+    and author !~* '(https?://|www\.|t\.me/|@[a-z0-9_]{4,}|([0-9][ ()-]*){6,})'
+  )
+);
+
+create index if not exists discussion_created_idx on public.discussion (created_at desc);
+create index if not exists discussion_parent_idx on public.discussion (parent_id);
+
+-- Javobga javob bo'lmasin (faqat bir daraja)
+create or replace function public.discussion_one_level()
+returns trigger language plpgsql as $$
+begin
+  if new.parent_id is not null and exists (
+    select 1 from public.discussion d where d.id = new.parent_id and d.parent_id is not null
+  ) then
+    raise exception 'Faqat asosiy xabarga javob yozish mumkin';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists discussion_one_level on public.discussion;
+create trigger discussion_one_level
+  before insert on public.discussion
+  for each row execute function public.discussion_one_level();
+
+alter table public.discussion enable row level security;
+
+drop policy if exists "anon can post" on public.discussion;
+create policy "anon can post"
+  on public.discussion for insert
+  to anon
+  with check (hidden = false);
+
+drop view if exists public.public_discussion;
+create view public.public_discussion as
+  select id, parent_id, topic, author, message, created_at
+  from public.discussion
+  where hidden = false
+  order by created_at desc;
+
+grant select on public.public_discussion to anon;

@@ -6,6 +6,7 @@ import Vacancies from './components/Vacancies.jsx'
 import Reports from './components/Reports.jsx'
 import Help from './components/Help.jsx'
 import Routes from './components/Routes.jsx'
+import Discussion from './components/Discussion.jsx'
 import Channels from './components/Channels.jsx'
 import Guide from './components/Guide.jsx'
 import Safety from './components/Safety.jsx'
@@ -13,7 +14,7 @@ import { fmtDate, daysLeft } from './utils.js'
 import { fetchAgency, nationalTotal } from './lib/liveJobs.js'
 import SOATO from './soato.json'
 
-const SECTIONS = ['ish', 'yol', 'yordam', 'ogoh', 'kanal', 'hujjat', 'xavf']
+const SECTIONS = ['ish', 'yol', 'yordam', 'ogoh', 'kanal', 'hujjat', 'xavf', 'muhokama']
 
 export default function App() {
   const [active, setActive] = useState('ish')
@@ -86,6 +87,7 @@ export default function App() {
       <Channels query={query} />
       <Guide />
       <Safety />
+      <Discussion />
 
       <footer className="site">
         <div className="wrap">

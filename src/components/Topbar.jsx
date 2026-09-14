@@ -6,6 +6,7 @@ const LINKS = [
   { id: 'ogoh', label: 'Xabarlar' },
   { id: 'kanal', label: 'Rasmiy kanallar' },
   { id: 'hujjat', label: 'Hujjatlar' },
+  { id: 'muhokama', label: 'Muhokama' },
 ]
 
 export default function Topbar({ active, onGo }) {

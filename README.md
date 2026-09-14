@@ -91,6 +91,18 @@ umuman yo‘q, ya'ni xabar yozgan odamning telefoni hech qachon ochilmaydi.
 **Huquqiy eslatma:** nomi ko‘rsatilgan ayblovni dalilsiz e'lon qilish tuhmat hisoblanadi.
 Shuning uchun forma dalilni majburiy so‘raydi va hech bir xabar moderatorsiz chiqmaydi.
 
+## Muhokama
+
+«Muhokama» bo‘limi xuddi shu Supabase bazasi va kalitlar bilan ishlaydi. `supabase/schema.sql`
+ni ishga tushirganingizda `discussion` jadvali ham yaratiladi — alohida sozlash shart emas.
+
+- Xabar **darhol chiqadi**, javoblar bir daraja (xabar → javob).
+- Baza o‘zi **havola, telefon raqami (9+ raqam) va @nom** yozilgan xabarlarni rad etadi — vizaga
+  «yordam beradigan» vositachilar muhokamani reklama joyiga aylantira olmasin. Maosh kabi sonlar
+  («15 000 000 so‘m») o‘tadi.
+- Nomaqbul xabarni yashirish: Supabase → **Table Editor → discussion** → `hidden` ni `true` qiling.
+  Xabarga yozilgan javoblar ham birga yashiriladi.
+
 ## Cheklov: Claude Artifact nusxasi
 
 Artifact sahifasi tashqi so‘rov yuborishga ruxsat bermaydi, shuning uchun u yerda **jonli
