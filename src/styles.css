@@ -486,3 +486,24 @@ body { top: 0 !important; }
 .langs li b { font-size: 14.5px; }
 .langs li span { font-size: 13px; color: var(--ink-2); }
 .route-links a { font-size: 14px; font-weight: 500; }
+
+/* ---------- Vizani olish tartibi ---------- */
+.visa {
+  display: grid; grid-template-columns: 1.5fr 1fr; gap: 22px;
+  margin-top: 20px; padding-top: 18px; border-top: 1px dashed var(--line);
+}
+@media (max-width: 760px) { .visa { grid-template-columns: 1fr; } }
+.visa-steps ol { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: 10px; }
+.visa-steps li {
+  counter-increment: step; position: relative; padding: 10px 12px 10px 46px;
+  background: var(--paper); border: 1px solid var(--line-soft); border-radius: 10px;
+  font-size: 14px; color: var(--ink-2);
+}
+.visa-steps li::before {
+  content: counter(step); position: absolute; left: 12px; top: 10px;
+  width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--stamp); color: #fff; font: 700 12px/1 var(--sans);
+}
+.visa-where ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.visa-where li { padding: 10px 12px; border-radius: 10px; background: var(--verified-soft); }
+.visa-where a { font-size: 14px; font-weight: 600; color: #0b5e40; overflow-wrap: anywhere; }

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { ROUTES, FROM_ABROAD_NOTE, FROM_HOME_NOTE } from '../routes.js'
+import { ROUTES, VISA, FROM_ABROAD_NOTE, FROM_HOME_NOTE } from '../routes.js'
 import { guessCountry } from '../help.js'
 import { norm } from '../utils.js'
 
@@ -124,6 +124,36 @@ export default function Routes() {
               </ul>
             </aside>
           </div>
+
+          {VISA[route.id] && (
+            <div className="visa">
+              <div className="visa-steps">
+                <h5>Vizani qanday olish — qadamma-qadam</h5>
+                <ol>
+                  {VISA[route.id].steps.map(s => (
+                    <li key={s}>{s}</li>
+                  ))}
+                </ol>
+                {VISA[route.id].warn && <div className="route-warn small">⚠ {VISA[route.id].warn}</div>}
+              </div>
+              <div className="visa-where">
+                <h5>Qayerda topshiriladi</h5>
+                <ul>
+                  {VISA[route.id].where.map(w => (
+                    <li key={w.t}>
+                      {w.u.startsWith('#') ? (
+                        <a href={w.u}>{w.t} →</a>
+                      ) : (
+                        <a href={w.u} target="_blank" rel="noopener noreferrer">
+                          {w.t} ↗
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
         </article>
       </div>
     </section>

@@ -199,6 +199,134 @@ export const ROUTES = [
   },
 ]
 
+// Vizani qanday olish (qadamlar) va qayerda topshiriladi.
+// Manzillar 2026-09-14 da tekshirilgan: taschkent.diplo.de, uz.usembassy.gov, gov.uk,
+// gov.pl/web/uzbekistan, mofa.gov.ae, mfa.gov.tr, eps.go.kr, gosuslugi.ru.
+// Ba'zi viza markazlari (TLScontact, VFS Global, Yaponiya elchixonasi) avtomatik tekshiruvni
+// bloklaydi, lekin brauzerda ochiladi.
+export const VISA = {
+  KR: {
+    steps: [
+      'Migratsiya agentligining Koreya bo‘yicha tanloviga ro‘yxatdan o‘ting.',
+      'EPS-TOPIK (koreys tili) imtihonini, keyin kasbiy ko‘nikma sinovini topshiring.',
+      'Nomzodlar ro‘yxatiga kiritilasiz — koreys ish beruvchisi sizni tanlaydi va mehnat shartnomasi imzolanadi.',
+      'Ish beruvchi Koreyada viza berishni tasdiqlovchi hujjat (CCVI) oladi.',
+      'Tibbiy ko‘rik va jo‘nashdan oldingi o‘qishdan o‘tasiz, E-9 vizasi Koreya elchixonasida rasmiylashtiriladi.',
+    ],
+    where: [
+      { t: 'Migratsiya agentligi — ro‘yxatdan o‘tish va tanlov', u: 'https://xorijdaish.uz' },
+      { t: 'Koreya Respublikasi elchixonasi, konsullik bo‘limi (Toshkent)', u: 'https://overseas.mofa.go.kr/uz-ko/index.do' },
+      { t: 'EPS tizimi — rus tilida', u: 'https://www.eps.go.kr/eo/langMain.eo?langCD=ru' },
+    ],
+  },
+  JP: {
+    steps: [
+      'Yapon tili imtihoni (JFT-Basic yoki JLPT N4) va tanlagan sohangiz bo‘yicha malaka imtihonidan o‘ting.',
+      'Yaponiyadagi ro‘yxatdan o‘tgan ish beruvchi bilan shartnoma tuzing (rasmiy vakansiyalar Migratsiya agentligida).',
+      'Ish beruvchi Yaponiya immigratsiya xizmatidan siz uchun «Certificate of Eligibility» (COE) oladi.',
+      'COE bilan Yaponiya elchixonasiga oldindan onlayn yozilib, viza hujjatlarini qog‘oz shaklida topshirasiz.',
+      'COE amal qilish muddati ichida (odatda 3 oy) Yaponiyaga kirishingiz kerak.',
+    ],
+    where: [
+      { t: 'Yaponiya elchixonasi (Toshkent) — onlayn navbat', u: 'https://www.uz.emb-japan.go.jp' },
+      { t: 'Migratsiya agentligi vakansiyalari', u: 'https://xorijdaish.uz' },
+    ],
+  },
+  DE: {
+    steps: [
+      'Diplomingiz Germaniyada tan olinishini tekshiring va ariza bering («Anerkennung» portali).',
+      'Til sertifikatini oling: Chancenkarte uchun nemis A1 yoki ingliz B2; ish vizasi uchun odatda nemis B1.',
+      'Milliy viza (90 kundan ortiq) arizasini Germaniya Tashqi ishlar vazirligining onlayn portalida to‘ldiring.',
+      'TLScontact orqali Toshkentdagi viza markaziga navbatga yoziling — navbat ro‘yxatdan o‘tish tartibida beriladi.',
+      'Belgilangan kuni hujjatlar va barmoq izini topshirasiz. Biometrik xorijga chiqish pasporti majburiy.',
+    ],
+    where: [
+      { t: 'Germaniya elchixonasi — Toshkent, Sharaf Rashidov ko‘chasi, 15 · +998 78 120-84-40', u: 'https://taschkent.diplo.de' },
+      { t: 'Onlayn ariza — Auslandsportal', u: 'https://digital.diplo.de' },
+      { t: 'TLScontact — Toshkentdagi viza markazi (navbat)', u: 'https://visas-de.tlscontact.com/en-us/country/uz/vac/uzTAS2de' },
+      { t: 'Diplomni tan oldirish portali', u: 'https://www.anerkennung-in-deutschland.de/html/en/index.php' },
+    ],
+  },
+  US: {
+    steps: [
+      'DV lotereyasi ochilgan davrda faqat dvprogram.state.gov saytida BEPUL ro‘yxatdan o‘ting va tasdiq raqamini saqlang.',
+      'Natijani o‘sha saytdagi «Entrant Status Check» bo‘limida o‘zingiz tekshirasiz — xat yoki SMS kelmaydi.',
+      'Yutgan bo‘lsangiz, DS-260 immigratsiya anketasini onlayn to‘ldirasiz.',
+      'Suhbat Toshkentdagi AQSh elchixonasida bo‘ladi: hujjatlar, tibbiy ko‘rik, viza to‘lovi.',
+    ],
+    warn: 'Faqat .gov manzilli rasmiy saytdan foydalaning. «Ro‘yxatdan o‘tkazib qo‘yamiz» deb pul so‘raganlar — firibgar.',
+    where: [
+      { t: 'AQSh elchixonasi (Toshkent) — viza bo‘limi', u: 'https://uz.usembassy.gov/visas/' },
+      { t: 'DV lotereyasi — rasmiy sayt', u: 'https://dvprogram.state.gov' },
+    ],
+  },
+  GB: {
+    steps: [
+      'GOV.UK dagi ro‘yxatdan rasmiy «scheme operator» (homiy tashkilot)ni tanlab, u orqali ishga qabul qilinasiz.',
+      'Homiy sizga «Certificate of Sponsorship» raqamini beradi.',
+      'Vizaga GOV.UK saytida onlayn ariza berasiz va to‘lovni qilasiz.',
+      'Toshkentdagi viza arizalari markaziga borib, barmoq izi va rasm topshirasiz.',
+    ],
+    where: [
+      { t: 'GOV.UK — Seasonal Worker vizasiga ariza', u: 'https://www.gov.uk/seasonal-worker-visa/apply' },
+      { t: 'VFS Global — Toshkentdagi viza markazi', u: 'https://visa.vfsglobal.com/uzb/en/gbr' },
+    ],
+  },
+  RU: {
+    steps: [
+      'Viza kerak emas. Chegarada migratsiya kartasida tashrif maqsadini «работа» (ish) deb ko‘rsating.',
+      'Belgilangan muddatda migratsiya hisobiga turing (odatda ish beruvchi yoki yashash joyi egasi qiladi).',
+      'Kirgan kundan boshlab 30 kun ichida patent uchun ariza bering: rus tili, tarix va huquq imtihoni sertifikati, tibbiy ko‘rik, sug‘urta, barmoq izi.',
+      'Patent uchun har oy belgilangan avans to‘lovini o‘z vaqtida to‘lang — kechiktirsangiz patent bekor bo‘ladi.',
+    ],
+    where: [
+      { t: 'Hujjatlar ko‘p migratsiya markazlarida (MMC) va MVD migratsiya bo‘limlarida qabul qilinadi', u: 'https://www.gosuslugi.ru/situation/foreign_citizens' },
+      { t: 'Migratsiya agentligi vakolatxonalari — yordam va maslahat (Yordam bo‘limida)', u: '#yordam' },
+    ],
+  },
+  KZ: {
+    steps: [
+      'Viza kerak emas, lekin ishlash uchun rasmiy ruxsat kerak.',
+      'Yuridik shaxsda ishlasangiz — ruxsatnomani ish beruvchi rasmiylashtiradi.',
+      'Jismoniy shaxslar (xonadonlar) uchun ishlasangiz — mehnat muhojiriga ruxsatnoma olinadi va oylik soliq to‘lanadi.',
+      'Joriy talab va muddatlarni O‘zbekiston elchixonasi yoki Qozog‘iston davlat xizmatlaridan aniqlang.',
+    ],
+    where: [
+      { t: 'O‘zbekiston elchixonasi (Astana)', u: 'https://uzembassy.kz' },
+      { t: 'Enbek.kz — davlat bandlik portali', u: 'https://www.enbek.kz' },
+    ],
+  },
+  TR: {
+    steps: [
+      'Avval Turkiyadagi ish beruvchi bilan kelishib, shartnoma tuzing.',
+      'Ish beruvchi Turkiya Mehnat vazirligidan siz uchun ish ruxsatnomasi (çalışma izni) oladi.',
+      'Siz Turkiyaning Toshkentdagi elchixonasi yoki konsulligida ish vizasini rasmiylashtirasiz.',
+      'Turist sifatida kirib ishlash — deportatsiya va kirish taqiqiga olib keladi.',
+    ],
+    where: [{ t: 'Turkiyaning O‘zbekistondagi vakolatxonalari — rasmiy ro‘yxat', u: 'https://www.mfa.gov.tr/turkiye_nin-ozbekistan-daki-temsilcilikleri.en.mfa' }],
+  },
+  AE: {
+    steps: [
+      'Ish beruvchi bilan shartnoma tuzasiz — BAAda vizani faqat ish beruvchi (homiy) rasmiylashtiradi.',
+      'Ish beruvchi ish ruxsatnomasi va kirish ruxsatnomasini oladi, siz shu bilan BAAga kirasiz.',
+      'BAAda tibbiy ko‘rik, Emirates ID va yashash vizasi rasmiylashtiriladi.',
+      'Siz o‘zingiz elchixonaga ariza bermaysiz. Viza uchun sizdan pul so‘ralsa — ehtiyot bo‘ling.',
+    ],
+    where: [{ t: 'BAA elchixonasi (Toshkent)', u: 'https://www.mofa.gov.ae/en/missions/tashkent' }],
+  },
+  PL: {
+    steps: [
+      'Polsha ish beruvchisi viloyat idorasidan siz uchun ish ruxsatnomasi (zezwolenie na pracę) oladi va sizga yuboradi.',
+      'e-Konsulat tizimida milliy viza (D) uchun ro‘yxatdan o‘tib, anketani to‘ldirasiz va navbat olasiz.',
+      'Belgilangan kuni Polshaning Toshkentdagi elchixonasiga hujjatlar bilan borasiz.',
+    ],
+    where: [
+      { t: 'Polsha elchixonasi (Toshkent)', u: 'https://www.gov.pl/web/uzbekistan' },
+      { t: 'e-Konsulat — viza arizasi va navbat', u: 'https://secure2.e-konsulat.gov.pl' },
+    ],
+  },
+}
+
 export const FROM_ABROAD_NOTE =
   'Siz hozir boshqa davlatdasiz. Ko‘p davlatlar ish vizasini faqat fuqaroligingiz yoki qonuniy yashash joyingizdagi elchixonada beradi. Turist sifatida kirib, keyin ishchi vizasiga o‘tish odatda mumkin emas — rasmiy saytdan tekshiring.'
 
