@@ -14,6 +14,7 @@ const MAX_BATCH_CHARS = 2500
 // Eng ko'p ko'rinadigan qisqa yozuvlar — mashina tarjimasi kontekstsiz xato qilmasligi uchun
 const OVERRIDES = {
   ru: {
+    'Ishonchli Ish': 'Надёжная работа',
     'Yordam kerak': 'Нужна помощь',
     Yordam: 'Помощь',
     Qidirish: 'Искать',
@@ -25,6 +26,7 @@ const OVERRIDES = {
     'To‘yxona · bazmgoh': 'Свадебные залы',
   },
   en: {
+    'Ishonchli Ish': 'Reliable Work',
     'Yordam kerak': 'Need help',
     Yordam: 'Help',
     Qidirish: 'Search',

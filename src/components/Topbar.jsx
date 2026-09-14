@@ -12,8 +12,11 @@ export default function Topbar({ active, onGo }) {
   return (
     <div className="topbar">
       <div className="wrap topbar-in">
-        <div className="brand" translate="no">
-          <span className="brand-mark" aria-hidden="true">II</span> Ishonchli Ish
+        <div className="brand">
+          <span className="brand-mark" aria-hidden="true" translate="no">
+            II
+          </span>
+          <span>Ishonchli Ish</span>
         </div>
         <nav className="navlinks">
           {LINKS.map(l => (
