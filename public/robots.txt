@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ishonchli-ish.netlify.app/sitemap.xml
+Sitemap: https://tezishtopish.netlify.app/sitemap.xml
