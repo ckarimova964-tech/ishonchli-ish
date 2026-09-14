@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { fmtDate, daysLeft } from '../utils.js'
+import ApplyModal from './ApplyModal.jsx'
 
 function Field({ label, value }) {
   if (!value && value !== 0) return null
@@ -104,41 +105,17 @@ function UzCard({ v }) {
       )}
 
       <div className="actions">
-        <a className="btn sm" href={v.url} target="_blank" rel="noopener noreferrer">
+        <button className="btn sm" onClick={() => setHow(true)}>
           Ariza berish
-        </a>
+        </button>
         <button className="btn sm ghost" onClick={() => setOpen(o => !o)}>
           {open ? 'Yopish' : 'Batafsil'}
         </button>
         <span className="spacer" />
-        <button className="link-mini apply-how-btn" onClick={() => setHow(h => !h)}>
-          {how ? 'Yo‘riqnomani yopish' : 'Qanday ariza beriladi?'}
-        </button>
+        <span className="link-mini">Ariza bepul · davlat tizimi orqali</span>
       </div>
 
-      {how && (
-        <div className="apply-how">
-          <b>Ariza bepul. Buning uchun shaxsingizni tasdiqlashingiz kerak:</b>
-          <ol>
-            <li>«Ariza berish» tugmasini bosing — vakansiyaning rasmiy sahifasi ochiladi.</li>
-            <li>U yerda «Anketa to‘ldirish» tugmasini bosing.</li>
-            <li>
-              Tizimga <b>Face-ID</b>, <b>OneID</b> yoki <b>MyID</b> orqali kiring. OneID hisobingiz
-              bo‘lmasa —{' '}
-              <a href="https://id.egov.uz/uz" target="_blank" rel="noopener noreferrer">
-                id.egov.uz
-              </a>{' '}
-              da bepul ro‘yxatdan o‘ting (pasport va telefon raqami kerak).
-            </li>
-            <li>Anketani to‘ldirib yuboring. Natija haqida tizim o‘zi xabar beradi.</li>
-          </ol>
-          <p>
-            Kirishsiz anketa ochilmaydi — bu davlat tizimining talabi, arizani haqiqiy odam
-            berayotganini tekshirish uchun. Sizdan pul yoki parol so‘ragan boshqa sayt va odamlarga
-            ishonmang.
-          </p>
-        </div>
-      )}
+      {how && <ApplyModal v={v} onClose={() => setHow(false)} />}
     </article>
   )
 }

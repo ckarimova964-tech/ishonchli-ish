@@ -497,6 +497,49 @@ body { top: 0 !important; }
 .apply-how ol { margin: 10px 0; padding-left: 20px; display: grid; gap: 6px; }
 .apply-how p { font-size: 13px; color: var(--ink-3); }
 
+/* ---------- Ariza berish oynasi ---------- */
+.modal-back {
+  position: fixed; inset: 0; z-index: 100; display: grid; place-items: center;
+  padding: 16px; background: rgba(20, 38, 61, .5); overflow-y: auto;
+}
+.modal {
+  position: relative; width: 100%; max-width: 660px; max-height: calc(100vh - 32px); overflow-y: auto;
+  background: var(--card); border-radius: 16px; padding: 24px;
+  box-shadow: 0 30px 80px -30px rgba(20, 38, 61, .6); display: grid; gap: 14px;
+}
+.modal h3 { font-size: 24px; margin-top: -6px; padding-right: 30px; }
+.modal-x {
+  position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink-2); cursor: pointer;
+  font: 400 22px/1 var(--sans);
+}
+.modal-x:hover { color: var(--ink); border-color: var(--ink-3); }
+.modal-sub { font-size: 14px; color: var(--ink-2); margin-top: -8px; }
+.modal-deadline { font-size: 13.5px; color: var(--warn); }
+.modal-block h5 { margin: 0 0 8px; font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.modal-block ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; font-size: 14px; color: var(--ink-2); }
+.modal-block ul.checklist { list-style: none; padding: 0; }
+.modal-block ul.checklist li { position: relative; padding-left: 26px; }
+.modal-block ul.checklist li::before {
+  content: '✓'; position: absolute; left: 0; top: 1px; width: 18px; height: 18px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--verified-soft); color: var(--verified); font: 700 11px/1 var(--sans);
+}
+.steps-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) { .steps-2 { grid-template-columns: 1fr; } .modal { padding: 20px 16px; } }
+.step-card {
+  display: flex; gap: 12px; padding: 14px; border-radius: 12px;
+  border: 1px solid var(--line); background: var(--paper);
+}
+.step-card.primary { border-color: #c7dcfa; background: var(--stamp-soft); }
+.step-card b { font-size: 15px; }
+.step-card p { margin: 6px 0 12px; font-size: 13px; color: var(--ink-2); }
+.step-no {
+  flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--stamp); color: #fff; font: 700 14px/1 var(--sans);
+}
+.step-card:not(.primary) .step-no { background: var(--ink-3); }
+.modal-note { font-size: 12.5px; color: var(--ink-3); }
+
 /* ---------- Vizani olish tartibi ---------- */
 .visa {
   display: grid; grid-template-columns: 1.5fr 1fr; gap: 22px;
