@@ -29,7 +29,8 @@ export default function Topbar({ active, onGo }) {
         <div className="topbar-actions">
           <LangPicker />
           <button className="sos-btn" onClick={() => onGo('yordam')}>
-            Yordam<span className="hide-sm"> kerak</span>
+            <span className="hide-sm">Yordam kerak</span>
+            <span className="show-sm">Yordam</span>
           </button>
         </div>
       </div>
