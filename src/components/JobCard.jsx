@@ -294,8 +294,58 @@ function LocalCard({ v }) {
   )
 }
 
+function WorldCard({ v }) {
+  return (
+    <article className="rec world">
+      <div className="rec-top">
+        <div className="rec-title">
+          <h3>{v.title}</h3>
+          <div className="rec-emp">
+            <b>{v.employer}</b>
+          </div>
+          <div className="rec-place">📍 {v.place || v.country}</div>
+        </div>
+        {v.pay && (
+          <div className="rec-pay">
+            <b className="pay-sm">{v.pay}</b>
+            <small>maosh (manbada)</small>
+          </div>
+        )}
+      </div>
+
+      <div className="badges">
+        <span className="badge world">{v.country}</span>
+        <span className="badge dim">Manba: {v.provider}</span>
+        {v.jobType && <span className="badge">{v.jobType.replace(/_/g, ' ')}</span>}
+        {v.posted && <span className="badge dim">E’lon: {fmtDate(v.posted)}</span>}
+      </div>
+
+      {v.tags?.length > 0 && (
+        <div className="badges">
+          {v.tags.map(t => (
+            <span key={t} className="badge dim">
+              {t}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <div className="actions">
+        <a className="btn sm" href={v.url} target="_blank" rel="noopener noreferrer">
+          E’lonni ochish ↗
+        </a>
+        <span className="spacer" />
+        <span className="link-mini">
+          Xususiy manba · e’lon ingliz yoki nemis tilida · viza sharoitini ish beruvchidan so‘rang
+        </span>
+      </div>
+    </article>
+  )
+}
+
 export default function JobCard({ v }) {
   if (v.src === 'uz') return <UzCard v={v} />
   if (v.src === 'local') return <LocalCard v={v} />
+  if (v.src === 'world') return <WorldCard v={v} />
   return <RuCard v={v} />
 }

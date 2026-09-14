@@ -4,6 +4,8 @@ import Topbar from './components/Topbar.jsx'
 import Hero from './components/Hero.jsx'
 import Vacancies from './components/Vacancies.jsx'
 import Reports from './components/Reports.jsx'
+import Help from './components/Help.jsx'
+import Routes from './components/Routes.jsx'
 import Channels from './components/Channels.jsx'
 import Guide from './components/Guide.jsx'
 import Safety from './components/Safety.jsx'
@@ -11,7 +13,7 @@ import { fmtDate, daysLeft } from './utils.js'
 import { fetchAgency, nationalTotal } from './lib/liveJobs.js'
 import SOATO from './soato.json'
 
-const SECTIONS = ['ish', 'ogoh', 'kanal', 'hujjat', 'xavf']
+const SECTIONS = ['ish', 'yol', 'yordam', 'ogoh', 'kanal', 'hujjat', 'xavf']
 
 export default function App() {
   const [active, setActive] = useState('ish')
@@ -78,6 +80,8 @@ export default function App() {
       <Topbar active={active} onGo={go} />
       <Hero onGo={go} stats={stats} liveState={liveState} setQuery={setQuery} />
       <Vacancies all={all} query={query} setQuery={setQuery} />
+      <Routes />
+      <Help />
       <Reports />
       <Channels query={query} />
       <Guide />
@@ -112,6 +116,17 @@ export default function App() {
                   </a>{' '}
                   ochiq API’si ({DATA.ru.length} ta e’lon: maoshi 55 000 rubldan yuqori,
                   aloqa ma’lumoti ochiq bo‘lganlari)
+                </li>
+                <li>
+                  Dunyo bo‘ylab ishlar:{' '}
+                  <a href="https://remotive.com" target="_blank" rel="noopener noreferrer">
+                    Remotive
+                  </a>{' '}
+                  (masofaviy ishlar) va{' '}
+                  <a href="https://www.arbeitnow.com" target="_blank" rel="noopener noreferrer">
+                    Arbeitnow
+                  </a>{' '}
+                  (Yevropa) — xususiy ochiq manbalar, qidiruvda jonli so‘raladi
                 </li>
                 <li>Ma’lumot olingan sana: {fmtDate(DATA.fetched)}</li>
               </ul>

@@ -1,0 +1,46 @@
+// Davlatlarning rasmiy (davlat) bandlik portallari. `q` — qidiruv so'zi qo'shiladigan shablon.
+// Havolalar 2026-09-14 da tekshirilgan. Ba'zi saytlar avtomatik tekshiruvni bloklaydi,
+// lekin brauzerda ochiladi (AQSH, Isroil, Litva).
+
+export const WORLD_PORTALS = [
+  { region: 'MDH va qo‘shnilar', country: 'O‘zbekiston', name: 'Milliy vakansiyalar bazasi', url: 'https://ish.mehnat.uz' },
+  { region: 'MDH va qo‘shnilar', country: 'Rossiya', name: 'Работа России', url: 'https://trudvsem.ru/vacancy/search', q: 'https://trudvsem.ru/vacancy/search?text=' },
+  { region: 'MDH va qo‘shnilar', country: 'Qozog‘iston', name: 'Enbek.kz', url: 'https://www.enbek.kz' },
+  { region: 'MDH va qo‘shnilar', country: 'Qirg‘iziston', name: 'Mehnat va ijtimoiy ta’minot vazirligi', url: 'https://www.mlsp.gov.kg/' },
+  { region: 'MDH va qo‘shnilar', country: 'Belarus', name: 'Davlat bandlik xizmati', url: 'https://gsz.gov.by/' },
+  { region: 'MDH va qo‘shnilar', country: 'Gruziya', name: 'Worknet', url: 'https://worknet.gov.ge/' },
+
+  { region: 'Yevropa', country: 'Yevropa Ittifoqi', name: 'EURES', url: 'https://eures.europa.eu/index_en', q: 'https://europa.eu/eures/portal/jv-se/search?lang=en&keywords=' },
+  { region: 'Yevropa', country: 'Germaniya', name: 'Arbeitsagentur Jobsuche', url: 'https://www.arbeitsagentur.de/jobsuche/', q: 'https://www.arbeitsagentur.de/jobsuche/suche?was=' },
+  { region: 'Yevropa', country: 'Polsha', name: 'Centralna Baza Ofert Pracy', url: 'https://oferty.praca.gov.pl/portal/lista-ofert' },
+  { region: 'Yevropa', country: 'Chexiya', name: 'Úřad práce', url: 'https://www.uradprace.cz/volna-mista-v-cr' },
+  { region: 'Yevropa', country: 'Litva', name: 'Užimtumo tarnyba', url: 'https://uzt.lt/' },
+  { region: 'Yevropa', country: 'Latviya', name: 'NVA vakansiyalar', url: 'https://cvvp.nva.gov.lv/' },
+  { region: 'Yevropa', country: 'Estoniya', name: 'Töötukassa', url: 'https://www.tootukassa.ee/' },
+  { region: 'Yevropa', country: 'Finlandiya', name: 'Työmarkkinatori', url: 'https://tyomarkkinatori.fi/en/' },
+  { region: 'Yevropa', country: 'Shvetsiya', name: 'Platsbanken', url: 'https://arbetsformedlingen.se/platsbanken/' },
+  { region: 'Yevropa', country: 'Norvegiya', name: 'Arbeidsplassen (NAV)', url: 'https://arbeidsplassen.nav.no/stillinger' },
+  { region: 'Yevropa', country: 'Daniya', name: 'Jobnet', url: 'https://job.jobnet.dk/CV/FindWork' },
+  { region: 'Yevropa', country: 'Niderlandiya', name: 'Werk.nl', url: 'https://www.werk.nl/werkzoekenden/vacatures/' },
+  { region: 'Yevropa', country: 'Belgiya', name: 'VDAB', url: 'https://www.vdab.be/vindeenjob/vacatures' },
+  { region: 'Yevropa', country: 'Fransiya', name: 'France Travail', url: 'https://candidat.francetravail.fr/offres/recherche' },
+  { region: 'Yevropa', country: 'Ispaniya', name: 'SEPE', url: 'https://www.sepe.es/' },
+  { region: 'Yevropa', country: 'Italiya', name: 'ClicLavoro', url: 'https://www.cliclavoro.gov.it/' },
+  { region: 'Yevropa', country: 'Avstriya', name: 'AMS alle jobs', url: 'https://jobs.ams.at/public/emps/' },
+  { region: 'Yevropa', country: 'Shveytsariya', name: 'Job-Room', url: 'https://www.job-room.ch/' },
+  { region: 'Yevropa', country: 'Irlandiya', name: 'JobsIreland', url: 'https://jobsireland.ie/' },
+  { region: 'Yevropa', country: 'Buyuk Britaniya', name: 'Find a job (DWP)', url: 'https://findajob.dwp.gov.uk/', q: 'https://findajob.dwp.gov.uk/search?q=' },
+  { region: 'Yevropa', country: 'Turkiya', name: 'İŞKUR', url: 'https://www.iskur.gov.tr' },
+
+  { region: 'Osiyo va Yaqin Sharq', country: 'Janubiy Koreya', name: 'EPS', url: 'https://www.eps.go.kr' },
+  { region: 'Osiyo va Yaqin Sharq', country: 'Janubiy Koreya', name: 'Work24', url: 'https://www.work24.go.kr/' },
+  { region: 'Osiyo va Yaqin Sharq', country: 'Yaponiya', name: 'Hello Work', url: 'https://www.hellowork.mhlw.go.jp/' },
+  { region: 'Osiyo va Yaqin Sharq', country: 'BAA', name: 'MOHRE', url: 'https://www.mohre.gov.ae/' },
+  { region: 'Osiyo va Yaqin Sharq', country: 'Saudiya Arabistoni', name: 'Qiwa', url: 'https://qiwa.sa/' },
+  { region: 'Osiyo va Yaqin Sharq', country: 'Isroil', name: 'Israel Employment Service', url: 'https://www.taasuka.gov.il/' },
+
+  { region: 'Amerika va Okeaniya', country: 'AQSH', name: 'CareerOneStop (Mehnat vazirligi)', url: 'https://www.careeronestop.org/Toolkit/Jobs/find-jobs.aspx' },
+  { region: 'Amerika va Okeaniya', country: 'Kanada', name: 'Job Bank', url: 'https://www.jobbank.gc.ca', q: 'https://www.jobbank.gc.ca/jobsearch/jobsearch?searchstring=' },
+  { region: 'Amerika va Okeaniya', country: 'Avstraliya', name: 'Workforce Australia', url: 'https://www.workforceaustralia.gov.au/individuals/jobs/search', q: 'https://www.workforceaustralia.gov.au/individuals/jobs/search?searchText=' },
+  { region: 'Amerika va Okeaniya', country: 'Yangi Zelandiya', name: 'Work and Income', url: 'https://www.workandincome.govt.nz/' },
+]

@@ -1,18 +1,18 @@
-import { HOTLINE } from '../sources.js'
+import LangPicker from './LangPicker.jsx'
 
 const LINKS = [
   { id: 'ish', label: 'Vakansiyalar' },
+  { id: 'yol', label: 'Borish yo‘llari' },
   { id: 'ogoh', label: 'Xabarlar' },
   { id: 'kanal', label: 'Rasmiy kanallar' },
   { id: 'hujjat', label: 'Hujjatlar' },
-  { id: 'xavf', label: 'Xavfsizlik' },
 ]
 
 export default function Topbar({ active, onGo }) {
   return (
     <div className="topbar">
       <div className="wrap topbar-in">
-        <div className="brand">
+        <div className="brand" translate="no">
           <span className="brand-mark" aria-hidden="true">II</span> Ishonchli Ish
         </div>
         <nav className="navlinks">
@@ -26,9 +26,12 @@ export default function Topbar({ active, onGo }) {
             </button>
           ))}
         </nav>
-        <a className="hotline" href={`tel:${HOTLINE.num}`}>
-          <span>Ishonch telefoni</span> {HOTLINE.num}
-        </a>
+        <div className="topbar-actions">
+          <LangPicker />
+          <button className="sos-btn" onClick={() => onGo('yordam')}>
+            Yordam<span className="hide-sm"> kerak</span>
+          </button>
+        </div>
       </div>
     </div>
   )

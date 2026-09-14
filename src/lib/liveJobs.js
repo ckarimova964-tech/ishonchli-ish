@@ -224,3 +224,145 @@ export async function nationalTotal() {
   const j = await getJson(`${NATIONAL}?per_page=1`)
   return j?.data?.total ?? null
 }
+
+// ---------- Dunyo bo'ylab: xususiy ochiq manbalar ----------
+// Remotive — dunyo bo'yicha masofaviy ishlar; Arbeitnow — Yevropa (asosan Germaniya).
+// Ikkalasi ham CORS'ga ruxsat bergan, kalit talab qilmaydi. Ular so'rovni kamroq yuborishni
+// so'raydi — shuning uchun faqat foydalanuvchi qidirganda so'raymiz va natijani seans davomida saqlaymiz.
+const REMOTIVE = 'https://remotive.com/api/remote-jobs'
+const ARBEITNOW = 'https://www.arbeitnow.com/api/job-board-api'
+
+// O'zbekcha so'z → ingliz va nemis e'lonlarida uchraydigan so'zlar
+const WORLD_DICT = {
+  ofitsiant: ['waiter', 'kellner', 'service'],
+  barmen: ['bartender', 'barkeeper'],
+  oshpaz: ['cook', 'chef', 'koch'],
+  restoran: ['restaurant', 'gastronomie'],
+  quruvchi: ['construction', 'bau'],
+  qurilish: ['construction', 'bau'],
+  dasturchi: ['developer', 'software', 'entwickler'],
+  programmist: ['developer', 'software', 'entwickler'],
+  kompyuter: ['it', 'support'],
+  oqituvchi: ['teacher', 'tutor', 'lehrer'],
+  hamshira: ['nurse', 'pflege'],
+  shifokor: ['doctor', 'arzt'],
+  sotuvchi: ['sales', 'verkäufer', 'verkauf'],
+  kassir: ['cashier', 'kasse'],
+  haydovchi: ['driver', 'fahrer'],
+  payvandchi: ['welder', 'schweißer'],
+  elektrik: ['electrician', 'elektriker'],
+  muhandis: ['engineer', 'ingenieur'],
+  buxgalter: ['accountant', 'buchhalter'],
+  menejer: ['manager'],
+  administrator: ['administrator', 'office'],
+  farrosh: ['cleaner', 'reinigung'],
+  tikuvchi: ['tailor', 'schneider'],
+  operator: ['operator'],
+  dizayner: ['designer'],
+  marketing: ['marketing'],
+  tarjimon: ['translator', 'übersetzer'],
+  logistika: ['logistics', 'logistik'],
+}
+
+export function worldTerms(words) {
+  const out = new Set()
+  for (const w of words) {
+    const k = String(w || '').toLowerCase().replace(/[‘’'`ʼ]/g, '').trim()
+    if (!k) continue
+    const hit = Object.entries(WORLD_DICT).find(([uz]) => k.includes(uz) || uz.includes(k))
+    if (hit) hit[1].forEach(t => out.add(t))
+    else if (/^[a-zäöüß\s-]{3,}$/i.test(k)) out.add(k) // ingliz/nemischa yozilgan bo'lsa o'zi
+  }
+  return [...out]
+}
+
+function mapRemotive(v) {
+  return {
+    id: 'rm-' + v.id,
+    src: 'world',
+    provider: 'Remotive',
+    title: v.title,
+    employer: v.company_name,
+    country: 'Masofaviy (dunyo)',
+    place: v.candidate_required_location || 'Masofaviy',
+    pay: v.salary || null,
+    tags: (v.tags || []).slice(0, 5),
+    jobType: v.job_type || '',
+    posted: (v.publication_date || '').slice(0, 10),
+    url: v.url,
+    open: true,
+  }
+}
+
+function mapArbeitnow(v) {
+  return {
+    id: 'an-' + v.slug,
+    src: 'world',
+    provider: 'Arbeitnow',
+    title: v.title,
+    employer: v.company_name,
+    country: v.remote ? 'Masofaviy (Yevropa)' : 'Yevropa',
+    place: v.location || '',
+    pay: null,
+    tags: (v.tags || []).slice(0, 5),
+    jobType: (v.job_types || []).join(', '),
+    posted: v.created_at ? new Date(v.created_at * 1000).toISOString().slice(0, 10) : '',
+    url: v.url,
+    open: true,
+  }
+}
+
+function cacheGet(key) {
+  try {
+    const raw = sessionStorage.getItem(key)
+    return raw ? JSON.parse(raw) : null
+  } catch {
+    return null
+  }
+}
+
+function cacheSet(key, val) {
+  try {
+    sessionStorage.setItem(key, JSON.stringify(val))
+  } catch {
+    /* saqlab bo'lmadi — muhim emas */
+  }
+}
+
+/** Dunyo bo'ylab qidiruv. `words` — o'zbekcha yoki inglizcha so'zlar. */
+export async function searchWorld(words) {
+  const terms = worldTerms(words)
+  if (!terms.length) return { rows: [], total: 0, terms }
+  const key = 'world:' + terms.join('|')
+  const cached = cacheGet(key)
+  if (cached) return cached
+
+  const [rem, arb] = await Promise.allSettled([
+    getJson(`${REMOTIVE}?search=${encodeURIComponent(terms[0])}&limit=40`),
+    getJson(ARBEITNOW),
+  ])
+  const rows = []
+  if (rem.status === 'fulfilled') {
+    const jobs = rem.value?.jobs || []
+    // Remotive tavsif ichidan ham qidiradi — sarlavha, soha yoki teglarda so'z borlarini afzal ko'ramiz
+    const relevant = jobs.filter(v => {
+      const hay = `${v.title} ${v.category} ${(v.tags || []).join(' ')}`.toLowerCase()
+      return terms.some(t => hay.includes(t))
+    })
+    rows.push(...(relevant.length ? relevant : jobs).map(mapRemotive))
+  }
+  if (arb.status === 'fulfilled') {
+    const list = arb.value?.data || []
+    rows.push(
+      ...list
+        .filter(v => {
+          const hay = `${v.title} ${(v.tags || []).join(' ')}`.toLowerCase()
+          return terms.some(t => hay.includes(t))
+        })
+        .map(mapArbeitnow)
+    )
+  }
+  const result = { rows: rows.filter(v => v.title && v.employer), total: rows.length, terms }
+  cacheSet(key, result)
+  return result
+}

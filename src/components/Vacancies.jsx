@@ -7,6 +7,7 @@ import {
   searchNational,
   searchManyNational,
   searchRussia,
+  searchWorld,
   PER_PAGE,
 } from '../lib/liveJobs.js'
 import SOATO from '../soato.json'
@@ -16,10 +17,11 @@ const SOURCES = [
   { id: 'local', label: "O'zbekiston" },
   { id: 'uz', label: 'Xorij — agentlik' },
   { id: 'ru', label: 'Rossiya' },
+  { id: 'world', label: 'Dunyo bo‘ylab' },
 ]
 
 const PAGE = 15
-const EMPTY_LIVE = { rows: [], total: 0, ruTotal: 0, page: 1, lastPage: 1, state: 'idle', label: '' }
+const EMPTY_LIVE = { rows: [], total: 0, ruTotal: 0, worldTotal: 0, page: 1, lastPage: 1, state: 'idle', label: '' }
 
 export default function Vacancies({ all, query, setQuery }) {
   const [src, setSrc] = useState('all')
@@ -40,7 +42,9 @@ export default function Vacancies({ all, query, setQuery }) {
     try {
       let nat
       let ru = { rows: [], total: 0 }
+      let world = { rows: [], total: 0 }
       if (category) {
+        const worldP = searchWorld(category.uz).catch(() => ({ rows: [], total: 0 }))
         nat = await searchManyNational(category.uz)
         const ruRes = await Promise.allSettled(category.ru.map(t => searchRussia(t, 1, 20)))
         for (const r of ruRes) {
@@ -49,15 +53,19 @@ export default function Vacancies({ all, query, setQuery }) {
             ru.total += r.value.total
           }
         }
+        world = await worldP
       } else {
+        const worldP = searchWorld([q]).catch(() => ({ rows: [], total: 0 }))
         nat = await searchNational(q, 1)
         ru = await searchRussia(q, 1, 30).catch(() => ({ rows: [], total: 0 }))
+        world = await worldP
       }
       if (my !== reqId.current) return
       setLive({
-        rows: [...nat.rows, ...ru.rows].map(v => ({ ...v, live: true })),
+        rows: [...nat.rows, ...ru.rows, ...world.rows].map(v => ({ ...v, live: true })),
         total: nat.total,
         ruTotal: ru.total,
+        worldTotal: world.total,
         page: 1,
         lastPage: nat.lastPage || 1,
         state: 'done',
@@ -180,9 +188,10 @@ export default function Vacancies({ all, query, setQuery }) {
           <div className="eyebrow">Vakansiyalar</div>
           <h2>Qidirgan ishingizni yozing — hammasi chiqadi</h2>
           <p>
-            Qidiruv uchta rasmiy bazani birdan so‘raydi: O‘zbekistonning Milliy vakansiyalar
-            bazasi (79 000+ e'lon), Migratsiya agentligining «Xorijda ish» tizimi va Rossiyaning
-            federal portali. Natijalar jonli keladi — yig‘ilgan nusxa bilan cheklanmaydi.
+            Qidiruv bir vaqtda beshta manbani so‘raydi: O‘zbekistonning Milliy vakansiyalar bazasi
+            (79 000+ e'lon), Migratsiya agentligining «Xorijda ish» tizimi, Rossiyaning federal
+            portali, hamda dunyo bo‘ylab masofaviy ishlar (Remotive) va Yevropa ishlari (Arbeitnow).
+            Natijalar jonli keladi.
           </p>
         </div>
 
@@ -280,6 +289,11 @@ export default function Vacancies({ all, query, setQuery }) {
               {live.ruTotal ? (
                 <>
                   , Rossiya portalida <b>{live.ruTotal.toLocaleString('en-US').replace(/,/g, ' ')}</b> ta
+                </>
+              ) : null}
+              {live.worldTotal ? (
+                <>
+                  , dunyo bo‘ylab <b>{live.worldTotal}</b> ta
                 </>
               ) : null}
             </span>
