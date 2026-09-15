@@ -20,9 +20,11 @@ export function contactProblem(text) {
   return CONTACTS.test(String(text || ''))
 }
 
+// Yangi «publishable» kalit (sb_publishable_...) faqat apikey sarlavhasida yuboriladi;
+// eski «anon» JWT kalit (eyJ...) uchun Authorization ham qo'shiladi.
 const headers = extra => ({
   apikey: ANON,
-  Authorization: `Bearer ${ANON}`,
+  ...(ANON.startsWith('eyJ') ? { Authorization: `Bearer ${ANON}` } : {}),
   'Content-Type': 'application/json',
   ...extra,
 })

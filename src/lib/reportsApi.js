@@ -10,9 +10,11 @@ const ANON = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
 
 export const isConfigured = Boolean(URL_BASE && ANON)
 
+// Yangi «publishable» kalit (sb_publishable_...) faqat apikey sarlavhasida yuboriladi;
+// eski «anon» JWT kalit (eyJ...) uchun Authorization ham qo'shiladi.
 const headers = extra => ({
   apikey: ANON,
-  Authorization: `Bearer ${ANON}`,
+  ...(ANON.startsWith('eyJ') ? { Authorization: `Bearer ${ANON}` } : {}),
   'Content-Type': 'application/json',
   ...extra,
 })

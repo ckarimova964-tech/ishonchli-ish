@@ -55,7 +55,7 @@ create policy "anon can insert pending"
 
 -- ---------- Saytga chiqadigan ko'rinish ----------
 drop view if exists public.public_reports;
-create view public.public_reports as
+create view public.public_reports with (security_invoker = true) as
   select id, who, place, story, loss_uzs, evidence, author, published_at
   from public.reports
   where status = 'approved'
@@ -121,7 +121,7 @@ create policy "anon can post"
   with check (hidden = false);
 
 drop view if exists public.public_discussion;
-create view public.public_discussion as
+create view public.public_discussion with (security_invoker = true) as
   select id, parent_id, topic, author, message, created_at
   from public.discussion
   where hidden = false
@@ -141,5 +141,24 @@ revoke all on public.reports from anon;
 revoke all on public.discussion from anon;
 grant insert (who, place, story, loss_uzs, evidence, author, contact) on public.reports to anon;
 grant insert (parent_id, topic, author, message) on public.discussion to anon;
+
+-- Ko'rinishlar security_invoker = true: so'rov mehmonning o'z huquqi bilan bajariladi
+-- (Supabase Advisor «Security Definer View» ogohlantirishi). Shuning uchun o'qish ham
+-- RLS siyosati va ustun darajasidagi ruxsat bilan cheklanadi: telefon (contact) va
+-- moderator izohi hech qachon o'qilmaydi, faqat tasdiqlangan / yashirilmagan qatorlar.
+drop policy if exists "anon can read approved" on public.reports;
+create policy "anon can read approved"
+  on public.reports for select
+  to anon
+  using (status = 'approved');
+
+drop policy if exists "anon can read visible" on public.discussion;
+create policy "anon can read visible"
+  on public.discussion for select
+  to anon
+  using (hidden = false);
+
+grant select (id, who, place, story, loss_uzs, evidence, author, published_at, status) on public.reports to anon;
+grant select (id, parent_id, topic, author, message, created_at, hidden) on public.discussion to anon;
 grant select on public.public_reports to anon;
 grant select on public.public_discussion to anon;
