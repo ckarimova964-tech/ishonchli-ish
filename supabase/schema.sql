@@ -26,7 +26,7 @@ create index if not exists reports_status_idx on public.reports (status, publish
 
 -- `published_at` moderator tasdiqlaganda avtomatik qo'yiladi
 create or replace function public.set_published_at()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql set search_path = '' as $$
 begin
   if new.status = 'approved' and (old.status is distinct from 'approved') then
     new.published_at := now();
@@ -96,7 +96,7 @@ create index if not exists discussion_parent_idx on public.discussion (parent_id
 
 -- Javobga javob bo'lmasin (faqat bir daraja)
 create or replace function public.discussion_one_level()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql set search_path = '' as $$
 begin
   if new.parent_id is not null and exists (
     select 1 from public.discussion d where d.id = new.parent_id and d.parent_id is not null
@@ -162,3 +162,15 @@ grant select (id, who, place, story, loss_uzs, evidence, author, published_at, s
 grant select (id, parent_id, topic, author, message, created_at, hidden) on public.discussion to anon;
 grant select on public.public_reports to anon;
 grant select on public.public_discussion to anon;
+
+
+-- «Enable automatic RLS» yoqilgan loyihalarda Supabase yaratadigan funksiyani
+-- internetdan (anon / authenticated) chaqirib bo'lmasin
+do $$
+begin
+  if exists (select 1 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+             where n.nspname = 'public' and p.proname = 'rls_auto_enable') then
+    revoke execute on function public.rls_auto_enable() from public, anon, authenticated;
+  end if;
+end;
+$$;
