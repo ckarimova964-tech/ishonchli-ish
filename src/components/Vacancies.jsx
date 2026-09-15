@@ -8,6 +8,7 @@ import {
   searchManyNational,
   searchRussia,
   searchWorld,
+  fetchWorldLatest,
   PER_PAGE,
 } from '../lib/liveJobs.js'
 import SOATO from '../soato.json'
@@ -32,6 +33,7 @@ export default function Vacancies({ all, query, setQuery }) {
   const [limit, setLimit] = useState(PAGE)
   const [live, setLive] = useState(EMPTY_LIVE)
   const [loadingMore, setLoadingMore] = useState(false)
+  const [worldLatest, setWorldLatest] = useState({ rows: [], state: 'idle' })
   const timer = useRef(null)
   const reqId = useRef(0)
 
@@ -111,12 +113,22 @@ export default function Vacancies({ all, query, setQuery }) {
     }
   }
 
+  // «Dunyo bo'ylab» bosilganda qidiruvsiz ham eng yangi dunyo e'lonlarini yuklaymiz
+  useEffect(() => {
+    if (src !== 'world' || worldLatest.state !== 'idle') return
+    setWorldLatest(w => ({ ...w, state: 'loading' }))
+    fetchWorldLatest()
+      .then(r => setWorldLatest({ rows: r.rows, state: 'done' }))
+      .catch(() => setWorldLatest({ rows: [], state: 'failed' }))
+  }, [src, worldLatest.state])
+
   // --- Ro'yxatni yig'ish ---
   const merged = useMemo(() => {
-    if (!live.rows.length) return all
+    const base = worldLatest.rows.length ? [...all, ...worldLatest.rows] : all
+    if (!live.rows.length) return base
     const inLive = new Set(live.rows.map(v => v.id))
-    return [...live.rows, ...all.filter(v => !inLive.has(v.id))]
-  }, [all, live.rows])
+    return [...live.rows, ...base.filter(v => !inLive.has(v.id))]
+  }, [all, live.rows, worldLatest.rows])
 
   const countries = useMemo(() => {
     const counts = new Map()
@@ -283,6 +295,10 @@ export default function Vacancies({ all, query, setQuery }) {
             <b>{rows.length}</b> ta e’lon ro‘yxatda{live.rows.length ? ` (${live.rows.length} tasi bazadan hozir yuklandi)` : ''}
           </span>
           {live.state === 'loading' && <span>Rasmiy bazalardan qidirilmoqda…</span>}
+          {src === 'world' && worldLatest.state === 'loading' && <span>Dunyo bo‘yicha e’lonlar yuklanmoqda…</span>}
+          {src === 'world' && worldLatest.state === 'failed' && (
+            <span>Dunyo manbalari hozir javob bermadi — biroz kutib qayta urinib ko‘ring</span>
+          )}
           {live.state === 'done' && (
             <span>
               «{live.label}» bo‘yicha: Milliy bazada <b>{live.total.toLocaleString('en-US').replace(/,/g, ' ')}</b> ta

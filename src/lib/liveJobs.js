@@ -329,6 +329,29 @@ function cacheSet(key, val) {
   }
 }
 
+/** Qidiruvsiz — dunyo bo'yicha eng yangi e'lonlar («Dunyo bo'ylab» tugmasi bosilganda). */
+export async function fetchWorldLatest() {
+  const key = 'world:latest'
+  const cached = cacheGet(key)
+  if (cached) return cached
+  const [rem, arb1, arb2] = await Promise.allSettled([
+    getJson(`${REMOTIVE}?limit=60`),
+    getJson(ARBEITNOW),
+    getJson(`${ARBEITNOW}?page=2`),
+  ])
+  const rows = []
+  if (rem.status === 'fulfilled') rows.push(...(rem.value?.jobs || []).map(mapRemotive))
+  for (const a of [arb1, arb2]) {
+    if (a.status === 'fulfilled') rows.push(...(a.value?.data || []).map(mapArbeitnow))
+  }
+  const seen = new Set()
+  const unique = rows.filter(v => v.title && v.employer && !seen.has(v.id) && seen.add(v.id))
+  if (!unique.length) throw new Error('world-empty')
+  const result = { rows: unique, total: unique.length }
+  cacheSet(key, result)
+  return result
+}
+
 /** Dunyo bo'ylab qidiruv. `words` — o'zbekcha yoki inglizcha so'zlar. */
 export async function searchWorld(words) {
   const terms = worldTerms(words)
