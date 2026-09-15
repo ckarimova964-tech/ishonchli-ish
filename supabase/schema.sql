@@ -128,3 +128,18 @@ create view public.public_discussion as
   order by created_at desc;
 
 grant select on public.public_discussion to anon;
+
+
+-- =====================================================================
+-- RUXSATLAR (loyiha «Automatically expose new tables» o'chirilgan holda yaratilgan)
+-- =====================================================================
+-- Jadvallar Data API'ga avtomatik ochilmaydi, shuning uchun mehmonga faqat kerakli
+-- minimal huquqni aniq beramiz: jadvalga faqat QO'SHISH, o'qish faqat ko'rinish orqali.
+-- RLS siyosatlari (yuqorida) qaysi qatorni qo'shish mumkinligini baribir cheklaydi.
+grant usage on schema public to anon;
+revoke all on public.reports from anon;
+revoke all on public.discussion from anon;
+grant insert (who, place, story, loss_uzs, evidence, author, contact) on public.reports to anon;
+grant insert (parent_id, topic, author, message) on public.discussion to anon;
+grant select on public.public_reports to anon;
+grant select on public.public_discussion to anon;
