@@ -170,7 +170,7 @@
    "personal_qualities_en": "Шахсий фазилатлар: интизомли, ишончли, йўловчилар билан хушмуомала, жамоада ишлай оладиган.",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 74,
+   "applications_count": 78,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -387,7 +387,7 @@
    "personal_qualities_en": "Шахсий фазилатлар: интизомли, ишончли, мустақил ишлай оладиган ва жамоада ишлаш қобилиятига эга.",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 86,
+   "applications_count": 88,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -601,7 +601,7 @@
    "personal_qualities_en": "Пунктуаллик, ишончлилик, ўзаро ҳурмат, аниқлик, жамоавий ишлай олиш",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 27,
+   "applications_count": 29,
    "language_certificate_label": {
     "value": "1",
     "module": "language_certificate",
@@ -1028,7 +1028,7 @@
    "personal_qualities_en": "Масъулиятлик ва мехнатсеварлик.",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 404,
+   "applications_count": 405,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -2299,7 +2299,7 @@
    "personal_qualities_en": "Жисмонан бақувват, жамоавий ишлаш кўникмаси, ҳафталик хизмат сафарларига тайёр бўлиш, меҳнатсеварлик, ишончлилик ва аниқлик",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 698,
+   "applications_count": 704,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -2507,7 +2507,7 @@
    "personal_qualities_en": "Жисмонан бақувват, жамоавий ишлаш кўникмаси, ҳафталик хизмат сафарларига тайёр бўлиш, меҳнатсеварлик, ишончлилик ва аниқлик",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 404,
+   "applications_count": 408,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -2715,7 +2715,7 @@
    "personal_qualities_en": "Жисмонан бақувват, жамоавий ишлаш кўникмаси, ҳафталик хизмат сафарларига тайёр бўлиш, меҳнатсеварлик, ишончлилик ва аниқлик",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 326,
+   "applications_count": 328,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -2923,7 +2923,7 @@
    "personal_qualities_en": "Жисмонан бақувват, жамоавий ишлаш кўникмаси, меҳнатсеварлик, ишончлилик ва аниқлик",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 552,
+   "applications_count": 557,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -3339,7 +3339,7 @@
    "personal_qualities_en": "Жисмонан бақувват, жамоавий ишлаш кўникмаси, ҳафталик хизмат сафарларига тайёр бўлиш, меҳнатсеварлик, ишончлилик ва аниқлик",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 520,
+   "applications_count": 525,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -3547,7 +3547,7 @@
    "personal_qualities_en": "Жисмонан бақувват, жамоавий ишлаш кўникмаси, ҳафталик хизмат сафарларига тайёр бўлиш, меҳнатсеварлик, ишончлилик ва аниқлик",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 873,
+   "applications_count": 877,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -3600,7 +3600,7 @@
   "status": true,
   "work_days_of_week": 5,
   "created_at": "2026-02-27 10:14:37",
-  "updated_at": "2026-08-19 15:52:28",
+  "updated_at": "2026-10-05 09:33:47",
   "occupation_name_uz": "Hamshira",
   "occupation_name_cyrl": "Ҳамшира",
   "occupation_name_en": "Nurse",
@@ -3642,7 +3642,7 @@
    "status": true,
    "work_days_of_week": 5,
    "created_at": "2026-02-27 10:14:37",
-   "updated_at": "2026-08-19 15:52:28",
+   "updated_at": "2026-10-05 09:33:47",
    "occupation_name_uz": "Hamshira",
    "occupation_name_cyrl": "Ҳамшира",
    "occupation_name_en": "Nurse",
@@ -3654,7 +3654,7 @@
    "sector_name_ru": "Медицина",
    "education": "Ўрта-махсус",
    "work_type": "Доимий",
-   "age_to": 40,
+   "age_to": 36,
    "age_from": 20,
    "info": "quyidagi imtiyozlar beriladi: 10 oylik stipendiya; bepul ta'lim olish; bepul turar joy; B2 til sertifikati xarajatlari; hujjatlarni tarjima qilish va Germaniyada tasdiqlatish; viza va aviachipta, aeroportdan ish joyigacha transfer; Germaniyada ishga joylashish",
    "address_abroad": null,
@@ -3755,7 +3755,7 @@
    "personal_qualities_en": "mas'uliyatli, do'stona, jamoada ishlash, rahmdil va mehribonlik hamda samarali muloqot qila olish",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 883,
+   "applications_count": 884,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -4599,7 +4599,7 @@
    "personal_qualities_en": "Масъулиятлилик, жиддийлик ва хушмуомала",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 47,
+   "applications_count": 48,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -4811,7 +4811,7 @@
    "personal_qualities_en": "Меҳнатсеварлик, ўз ишига бўлган садоқат",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 1786,
+   "applications_count": 1787,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
