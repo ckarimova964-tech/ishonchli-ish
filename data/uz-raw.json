@@ -380,7 +380,7 @@
    "personal_qualities_en": "Соғлом, меҳнатсевар, спиртли ичимлик истеъмол қилмайдиган",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 17,
+   "applications_count": 18,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -804,7 +804,7 @@
    "personal_qualities_en": "Тез ўрганиш қобилияти, мулоқотга киришувчанлик, озодалик ва масъулиятлилик.",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 80,
+   "applications_count": 81,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -1012,7 +1012,7 @@
    "personal_qualities_en": "Шахсий фазилатлар: интизомли, ишончли, йўловчилар билан хушмуомала, жамоада ишлай оладиган.",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 107,
+   "applications_count": 111,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -1223,7 +1223,7 @@
    "personal_qualities_en": "Шахсий фазилатлар: интизомли, ишончли, мустақил ишлай оладиган ва жамоада ишлаш қобилиятига эга.",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 370,
+   "applications_count": 388,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -1639,7 +1639,7 @@
    "personal_qualities_en": "Ҳамдардлик ва ғамхўрлик; мослашувчанлик ва эгилувчанлик; самарали мулоқот қобилияти",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 47,
+   "applications_count": 48,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -1847,7 +1847,7 @@
    "personal_qualities_en": "Жисмонан бақувват, жамоавий ишлаш кўникмаси, ҳафталик хизмат сафарларига тайёр бўлиш, меҳнатсеварлик, ишончлилик ва аниқлик",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 857,
+   "applications_count": 859,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -2055,7 +2055,7 @@
    "personal_qualities_en": "Жисмонан бақувват, жамоавий ишлаш кўникмаси, ҳафталик хизмат сафарларига тайёр бўлиш, меҳнатсеварлик, ишончлилик ва аниқлик",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 485,
+   "applications_count": 487,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -2263,7 +2263,7 @@
    "personal_qualities_en": "Жисмонан бақувват, жамоавий ишлаш кўникмаси, ҳафталик хизмат сафарларига тайёр бўлиш, меҳнатсеварлик, ишончлилик ва аниқлик",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 401,
+   "applications_count": 403,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -2471,7 +2471,7 @@
    "personal_qualities_en": "Жисмонан бақувват, жамоавий ишлаш кўникмаси, меҳнатсеварлик, ишончлилик ва аниқлик",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 656,
+   "applications_count": 657,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -2887,7 +2887,7 @@
    "personal_qualities_en": "Жисмонан бақувват, жамоавий ишлаш кўникмаси, ҳафталик хизмат сафарларига тайёр бўлиш, меҳнатсеварлик, ишончлилик ва аниқлик",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 616,
+   "applications_count": 617,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -3095,7 +3095,7 @@
    "personal_qualities_en": "Жисмонан бақувват, жамоавий ишлаш кўникмаси, ҳафталик хизмат сафарларига тайёр бўлиш, меҳнатсеварлик, ишончлилик ва аниқлик",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 1003,
+   "applications_count": 1005,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -3303,7 +3303,7 @@
    "personal_qualities_en": "mas'uliyatli, do'stona, jamoada ishlash, rahmdil va mehribonlik hamda samarali muloqot qila olish",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 963,
+   "applications_count": 966,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
@@ -3929,7 +3929,7 @@
    "personal_qualities_en": "Жисмоний чидамлилик, зарарли одатларнинг йўқлиги.",
    "is_interested_vacancy": 0,
    "is_applicantion": 0,
-   "applications_count": 621,
+   "applications_count": 620,
    "language_certificate_label": {
     "value": "2",
     "module": "language_certificate",
